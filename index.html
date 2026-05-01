@@ -125,9 +125,21 @@
   .inv-meta-cell:nth-child(4){border-top:1px solid #e0e0e0}
   .inv-meta-cell:nth-child(5){border-top:1px solid #e0e0e0;border-right:1px solid #e0e0e0}
   .inv-meta-cell:nth-child(6){border-top:1px solid #e0e0e0}
+  .inv-meta-cell:nth-child(7){border-top:1px solid #e0e0e0;border-right:1px solid #e0e0e0}
+  .inv-meta-cell:nth-child(8){border-top:1px solid #e0e0e0}
   .inv-meta-lbl{color:#777;font-size:9px;font-weight:700;text-transform:uppercase;margin-bottom:2px;letter-spacing:0.3px}
   .inv-meta-val{color:#111;font-weight:700;font-size:12px}
   .payment-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:700;background:#e8f5e9;color:#2e7d32}
+
+  /* Bank Details Section */
+  .inv-bank{background:#f8f9ff;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;padding:10px 14px;display:flex;gap:12px;align-items:flex-start}
+  .inv-bank-info{flex:1}
+  .inv-bank-title{font-size:10px;font-weight:800;color:#1a237e;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+  .inv-bank-row{font-size:10px;color:#333;margin-bottom:3px}
+  .inv-bank-row span{font-weight:700;color:#111}
+  .inv-qr-wrap{width:80px;flex-shrink:0;text-align:center}
+  .inv-qr-wrap img{width:70px;height:70px;border:2px solid #1a237e;border-radius:6px}
+  .inv-qr-lbl{font-size:8px;color:#777;margin-top:3px;font-weight:700}
 
   /* Invoice Table */
   .inv-body{padding:0 14px 14px}
@@ -157,7 +169,8 @@
   /* Action buttons */
   .inv-actions{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
   .btn-pdf{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#1a237e,#1565c0);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center}
-  .btn-wa{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#1b5e20,#2e7d32);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer}
+  .btn-dl{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#e65100,#bf360c);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center}
+  .btn-email{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#00695c,#00897b);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center}
   .btn-new{width:100%;padding:13px;background:linear-gradient(135deg,#4a148c,#6a1b9a);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;cursor:pointer;margin-top:4px}
 
   /* Log */
@@ -171,12 +184,26 @@
   .log-qty{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;flex-shrink:0}
   .q-in{color:#4ade80}.q-out{color:#fb923c}
   .refresh-btn{width:100%;margin-top:10px;padding:9px;background:var(--card2);border:1px solid var(--border);border-radius:10px;color:var(--sub);font-size:12px;font-weight:600;cursor:pointer}
+
+  /* Email reminder status */
+  #emailStatus{font-size:11px;margin-top:6px;text-align:center;min-height:16px}
+  .es-ok{color:#4ade80}.es-err{color:#f87171}.es-sending{color:#60a5fa}
 </style>
 </head>
 <body>
 
 <script>
-  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0ym6Hjx578WfB8ffeM5cDl2721GfiGpfa4yBtWui-_9p0tu5St-QBQu7AzKQ4agrZxQ/exec";
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFLJzhkKSL47mzQ5UgD7amksf7kMpxXUE8Te4_1OxMBrNjMW76-SHa_yfru8GMWUKJ/exec";
+
+  // ── Bank & UPI details — update these ──
+  var BANK_DETAILS = {
+    accountName : "Business Coaching India LLP",
+    bankName    : "HDFC Bank",
+    accountNo   : "50200012345678",
+    ifsc        : "HDFC0001234",
+    branch      : "Connaught Place, New Delhi",
+    upiId       : "bci@hdfcbank"
+  };
 </script>
 
 <!-- PROCESSING OVERLAY -->
@@ -188,7 +215,7 @@
 
 <!-- INVOICE MODAL -->
 <div id="invoiceModal">
-  <div class="invoice-box">
+  <div class="invoice-box" id="invoicePrintBox">
     <!-- Header -->
     <div class="inv-header">
       <div class="inv-bci-logo">BCI</div>
@@ -205,6 +232,26 @@
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Time</div><div class="inv-meta-val" id="invTime">—</div></div>
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Phone</div><div class="inv-meta-val" id="invPhone">—</div></div>
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Payment</div><div class="inv-meta-val"><span class="payment-badge" id="invPayment">Cash</span></div></div>
+      <div class="inv-meta-cell"><div class="inv-meta-lbl">Email</div><div class="inv-meta-val" id="invEmail">—</div></div>
+      <div class="inv-meta-cell"></div>
+    </div>
+
+    <!-- Bank Details + QR -->
+    <div class="inv-bank">
+      <div class="inv-bank-info">
+        <div class="inv-bank-title">🏦 Bank Transfer / UPI Payment Details</div>
+        <div class="inv-bank-row">Account Name: <span id="bkName">—</span></div>
+        <div class="inv-bank-row">Bank: <span id="bkBank">—</span></div>
+        <div class="inv-bank-row">Account No: <span id="bkAcc">—</span></div>
+        <div class="inv-bank-row">IFSC: <span id="bkIFSC">—</span></div>
+        <div class="inv-bank-row">Branch: <span id="bkBranch">—</span></div>
+        <div class="inv-bank-row">UPI ID: <span id="bkUPI">—</span></div>
+      </div>
+      <div class="inv-qr-wrap">
+        <!-- QR generated dynamically from UPI ID -->
+        <img id="invQrCode" src="" alt="UPI QR">
+        <div class="inv-qr-lbl">Scan to Pay</div>
+      </div>
     </div>
 
     <!-- Table -->
@@ -238,9 +285,11 @@
 
   <!-- Buttons -->
   <div class="inv-actions">
-    <button class="btn-pdf" id="btnOpenPDF">📄 Open PDF</button>
-    <button class="btn-wa" id="btnWhatsApp">📲 WhatsApp</button>
+    <button class="btn-pdf" id="btnOpenPDF">📄 View PDF</button>
+    <button class="btn-dl" id="btnDownload">⬇️ Download</button>
+    <button class="btn-email" id="btnSendEmail" onclick="sendEmailReminder()">📧 Email Bill</button>
   </div>
+  <div id="emailStatus"></div>
   <button class="btn-new" onclick="startNewOrder()">➕ New Order</button>
 </div>
 
@@ -274,21 +323,23 @@
       <input class="order-field" type="text" id="customerName" placeholder="Walk-in Customer">
     </div>
   </div>
-  <div class="order-meta-3">
-    <div class="order-field-wrap" style="grid-column:span 2">
+  <div class="order-meta" style="margin-bottom:8px">
+    <div class="order-field-wrap">
       <div class="field-lbl">Customer Phone</div>
       <input class="order-field" type="tel" id="customerPhone" placeholder="+91 XXXXX XXXXX">
     </div>
     <div class="order-field-wrap">
-      <div class="field-lbl">Payment Mode</div>
-      <select class="order-field" id="paymentMode">
-        <option value="Cash">💵 Cash</option>
-        <option value="UPI">📱 UPI</option>
-        <option value="Card">💳 Card</option>
-        <option value="Cheque">🏦 Cheque</option>
-        <option value="Bank Transfer">🔁 Bank Transfer</option>
-      </select>
+      <div class="field-lbl">Customer Email</div>
+      <input class="order-field" type="email" id="customerEmail" placeholder="email@example.com">
     </div>
+  </div>
+  <div class="order-field-wrap">
+    <div class="field-lbl">Payment Mode</div>
+    <select class="order-field" id="paymentMode">
+      <option value="Cash">💵 Cash</option>
+      <option value="UPI">📱 UPI</option>
+      <option value="Card">💳 Card</option>
+    </select>
   </div>
 </div>
 
@@ -355,6 +406,7 @@
 
 <script>
   var cart=[], pendingSku=null, currentOrder=genOrderNum(), recentLog=[];
+  var currentInvoiceData=null; // stores last processed order response
 
   window.onload=function(){
     document.getElementById('orderNumberDisplay').textContent=currentOrder;
@@ -367,7 +419,6 @@
     return 'BCI-'+now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'-'+pad(now.getHours())+pad(now.getMinutes())+pad(now.getSeconds());
   }
 
-  // Amount in words (Indian format) — mirrors GAS version
   function amountInWords(amount){
     var ones=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
     var tens=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
@@ -484,6 +535,7 @@
     if(!cart.length){alert('Cart is empty!');return;}
     var customerName =document.getElementById('customerName').value.trim()  || 'Walk-in Customer';
     var customerPhone=document.getElementById('customerPhone').value.trim()  || '';
+    var customerEmail=document.getElementById('customerEmail').value.trim()  || '';
     var paymentMode  =document.getElementById('paymentMode').value           || 'Cash';
 
     document.getElementById('processBtn').disabled=true;
@@ -500,6 +552,7 @@
       orderNumber  : currentOrder,
       customerName : customerName,
       customerPhone: customerPhone,
+      customerEmail: customerEmail,
       paymentMode  : paymentMode,
       items: cart.map(function(item){
         return{sku:item.sku,name:item.name,category:item.category,qty:item.qty,price:item.price,sgst:item.sgst,igst:item.igst};
@@ -516,6 +569,7 @@
       for(var i=0;i<cart.length;i++) recentLog.unshift({sku:cart[i].sku,name:cart[i].name,found:true,type:'OUT',qty:cart[i].qty});
       if(recentLog.length>30)recentLog.length=30;
       renderLog();
+      currentInvoiceData=res;
       showInvoiceModal(res);
       refreshStats();
     })
@@ -528,11 +582,13 @@
 
   function showInvoiceModal(res){
     var payMode = res.paymentMode || 'Cash';
+
     document.getElementById('invOrderNum').textContent  = res.orderNumber;
     document.getElementById('invDate').textContent      = res.dateStr;
     document.getElementById('invTime').textContent      = res.timeStr;
     document.getElementById('invCustomer').textContent  = res.customerName;
     document.getElementById('invPhone').textContent     = res.customerPhone || 'N/A';
+    document.getElementById('invEmail').textContent     = res.customerEmail || 'N/A';
     document.getElementById('invPayment').textContent   = payMode;
     document.getElementById('invSubTotal').textContent  = '₹'+res.subTotal;
     document.getElementById('invTotalSGST').textContent = '₹'+res.totalSGST;
@@ -541,6 +597,19 @@
     document.getElementById('invWords').textContent     = amountInWords(parseFloat(res.grandTotal));
     document.getElementById('invPaidMode').textContent  = 'via '+payMode;
 
+    // Bank details
+    document.getElementById('bkName').textContent   = BANK_DETAILS.accountName;
+    document.getElementById('bkBank').textContent   = BANK_DETAILS.bankName;
+    document.getElementById('bkAcc').textContent    = BANK_DETAILS.accountNo;
+    document.getElementById('bkIFSC').textContent   = BANK_DETAILS.ifsc;
+    document.getElementById('bkBranch').textContent = BANK_DETAILS.branch;
+    document.getElementById('bkUPI').textContent    = BANK_DETAILS.upiId;
+
+    // UPI QR code via Google Charts API
+    var upiString = 'upi://pay?pa='+encodeURIComponent(BANK_DETAILS.upiId)+'&pn='+encodeURIComponent(BANK_DETAILS.accountName)+'&am='+res.grandTotal+'&cu=INR&tn='+encodeURIComponent(res.orderNumber);
+    var qrUrl = 'https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl='+encodeURIComponent(upiString)+'&choe=UTF-8';
+    document.getElementById('invQrCode').src = qrUrl;
+
     var tbody=document.getElementById('invTableBody'),rows='',items=res.items||[];
     for(var i=0;i<items.length;i++){
       var it=items[i];
@@ -548,36 +617,87 @@
     }
     tbody.innerHTML=rows;
 
-    // PDF button
+    // View PDF button
     if(res.pdfUrl){
       document.getElementById('btnOpenPDF').onclick=function(){window.open(res.pdfUrl,'_blank');};
       document.getElementById('btnOpenPDF').style.display='block';
+
+      // Download button — triggers direct download via anchor
+      document.getElementById('btnDownload').onclick=function(){
+        var a=document.createElement('a');
+        a.href=res.pdfUrl;
+        a.download='Invoice_'+res.orderNumber+'.pdf';
+        a.target='_blank';
+        a.click();
+      };
+      document.getElementById('btnDownload').style.display='block';
     } else {
       document.getElementById('btnOpenPDF').style.display='none';
+      document.getElementById('btnDownload').style.display='none';
     }
 
-    // WhatsApp share button
-    var waMsg = '🧾 *BCI Invoice*\n'
-      +'Order: '+res.orderNumber+'\n'
-      +'Customer: '+res.customerName+'\n'
-      +'Date: '+res.dateStr+' '+res.timeStr+'\n'
-      +'Payment: '+payMode+'\n'
-      +'Amount: *₹'+res.grandTotal+'*\n'
-      +(res.pdfUrl ? '📄 PDF: '+res.pdfUrl : '');
-    document.getElementById('btnWhatsApp').onclick=function(){
-      window.open('https://wa.me/?text='+encodeURIComponent(waMsg),'_blank');
-    };
-
+    // Show / hide email button
+    var emailBtn=document.getElementById('btnSendEmail');
+    if(res.customerEmail && res.customerEmail.indexOf('@')>0){
+      emailBtn.style.display='block';
+    } else {
+      emailBtn.style.display='none';
+    }
+    document.getElementById('emailStatus').textContent='';
     document.getElementById('invoiceModal').style.display='block';
+  }
+
+  // ── Send email reminder ──
+  function sendEmailReminder(){
+    if(!currentInvoiceData){return;}
+    var email = currentInvoiceData.customerEmail;
+    if(!email||email.indexOf('@')<0){alert('Valid email nahi hai!');return;}
+
+    var btn=document.getElementById('btnSendEmail');
+    btn.disabled=true;
+    setEmailStatus('sending','📧 Email bheja ja raha hai...');
+
+    var payload = encodeURIComponent(JSON.stringify({
+      to          : email,
+      customerName: currentInvoiceData.customerName,
+      orderNumber : currentInvoiceData.orderNumber,
+      grandTotal  : currentInvoiceData.grandTotal,
+      dateStr     : currentInvoiceData.dateStr,
+      paymentMode : currentInvoiceData.paymentMode,
+      pdfUrl      : currentInvoiceData.pdfUrl || ''
+    }));
+
+    fetch(SCRIPT_URL+'?action=sendEmail&data='+payload,{method:'GET',redirect:'follow'})
+    .then(function(r){return r.json();})
+    .then(function(res){
+      btn.disabled=false;
+      if(res.success){
+        setEmailStatus('ok','✅ Email successfully bheja gaya: '+email);
+      } else {
+        setEmailStatus('err','❌ Email error: '+(res.error||'Unknown'));
+      }
+    })
+    .catch(function(err){
+      btn.disabled=false;
+      setEmailStatus('err','❌ Connection error: '+err.message);
+    });
+  }
+
+  function setEmailStatus(type,msg){
+    var el=document.getElementById('emailStatus');
+    el.className='email-status es-'+type;
+    el.textContent=msg;
   }
 
   function startNewOrder(){
     document.getElementById('invoiceModal').style.display='none';
     cart=[];renderCart();
     currentOrder=genOrderNum();
+    currentInvoiceData=null;
     document.getElementById('orderNumberDisplay').textContent=currentOrder;
     document.getElementById('customerName').value='';
     document.getElementById('customerPhone').value='';
+    document.getElementById('customerEmail').value='';
     document.getElementById('paymentMode').value='Cash';
     document.getElementById('liveStatus').textContent='🟢 Naya order — scan karo';
     try{document.getElementById('cameraFrame').contentWindow.postMessage({type:'RESUME_SCAN'},'*')}catch(e){}
