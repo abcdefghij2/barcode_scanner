@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;background:#000;overflow:hidden}
+  #video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+  #canvas{display:none}
+  #scanOverlay{position:absolute;inset:0;pointer-events:none;display:none}
+  #scanLine{position:absolute;left:4%;width:92%;height:3px;background:linear-gradient(90deg,transparent,rgba(234,67,53,0.95),transparent);animation:scanAnim 2s linear infinite;box-shadow:0 0 10px rgba(234,67,53,0.7)}
+  @keyframes scanAnim{0%{top:12%}50%{top:82%}100%{top:12%}}
+  .corner{position:absolute;width:34px;height:34px;border-color:#fff;border-style:solid}
+  .corner.tl{top:8px;left:8px;border-width:3px 0 0 3px;border-radius:4px 0 0 0}
+  .corner.tr{top:8px;right:8px;border-width:3px 3px 0 0;border-radius:0 4px 0 0}
+  .corner.bl{bottom:8px;left:8px;border-width:0 0 3px 3px;border-radius:0 0 0 4px}
+  .corner.br{bottom:8px;right:8px;border-width:0 3px 3px 0;border-radius:0 0 4px 0}
+  #statusBar{position:absolute;top:0;left:0;right:0;background:rgba(0,0,0,0.65);color:#fff;font-family:Arial,sans-serif;font-size:13px;padding:8px 14px;text-align:center;display:none;z-index:20}
+  #flashOverlay{position:absolute;inset:0;background:rgba(52,168,83,0.45);opacity:0;pointer-events:none;transition:opacity 0.15s ease;z-index:15}
+  #screenPermission{position:absolute;inset:0;background:linear-gradient(160deg,#1a1a2e,#16213e);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:28px;text-align:center;z-index:30}
+  .sp-icon{font-size:56px}
+  .sp-title{font-family:Arial,sans-serif;font-size:18px;font-weight:700;color:#1565c0}
+  .sp-sub{font-family:Arial,sans-serif;font-size:12px;color:#aaa;line-height:1.7;max-width:280px}
+  .spinner{width:40px;height:40px;border:3px solid #2a2a3e;border-top-color:#1565c0;border-radius:50%;animation:spin 0.8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #btnTap{display:none;background:linear-gradient(135deg,#1565c0,#0d47a1);color:#fff;border:none;border-radius:14px;padding:16px 28px;font-family:Arial,sans-serif;font-size:16px;font-weight:700;cursor:pointer;width:100%;max-width:280px;box-shadow:0 4px 16px rgba(21,101,192,0.5)}
+</style>
+</head>
+<body>
+<video id="video" autoplay playsinline muted></video>
+<canvas id="canvas"></canvas>
+<div id="scanOverlay">
+  <div id="scanLine"></div>
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+</div>
+<div id="statusBar">🟢 Point camera at barcode...</div>
+<div id="flashOverlay"></div>
+<div id="screenPermission">
+  <div class="sp-icon">📷</div>
+  <div class="sp-title">BCI Camera Scanner</div>
+  <div class="sp-sub" id="spSub">Camera shuru ho rahi hai...</div>
+  <div class="spinner" id="spinner"></div>
+  <button id="btnTap" onclick="startCamera()">📷 Start Camera</button>
+</div>
+<script>
+  var cameraStream=null,barcodeDetector=null,scanInterval=null,lastCode='',cooldown=false;
+  if('BarcodeDetector' in window){
+    try{barcodeDetector=new BarcodeDetector({formats:['code_128','ean_13','ean_8','code_39','upc_a','upc_e','qr_code','data_matrix','itf']})}
+    catch(e){barcodeDetector=null}
+  }
+  window.addEventListener('load',function(){tryCamera()});
+  window.addEventListener('message',function(e){
+    if(!e.data||typeof e.data!=='object')return;
+    if(e.data.type==='START_CAMERA')tryCamera();
+    if(e.data.type==='STOP_CAMERA')stopCamera();
+    if(e.data.type==='RESUME_SCAN'){cooldown=false;lastCode='';}
+  });
+  function tryCamera(){
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){showTapButton('Camera supported nahi. Chrome use karo.');return;}
+    navigator.mediaDevices.getUserMedia({
+      video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},
+      audio:false
+    })
+    .then(onCameraReady)
+    .catch(function(err){
+      if(err.name==='NotAllowedError')showTapButton('Camera allow karo — "Start Camera" tap karo.');
+      else if(err.name==='OverconstrainedError')
+        navigator.mediaDevices.getUserMedia({video:true,audio:false}).then(onCameraReady).catch(function(e2){showTapButton('Camera error: '+e2.message)});
+      else showTapButton('Camera error: '+err.message);
+    });
+  }
+  function startCamera(){
+    var btn=document.getElementById('btnTap');
+    btn.disabled=true;btn.textContent='Starting...';
+    navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false})
+    .then(onCameraReady)
+    .catch(function(err){
+      btn.disabled=false;btn.textContent='📷 Start Camera';
+      document.getElementById('spSub').textContent=err.name==='NotAllowedError'?'Permission deny hua. Browser settings mein Camera Allow karo.':'Error: '+err.message;
+    });
+  }
+  function onCameraReady(stream){
+    cameraStream=stream;
+    var video=document.getElementById('video');
+    video.srcObject=stream;
+    video.style.display='block';
+    document.getElementById('screenPermission').style.display='none';
+    document.getElementById('scanOverlay').style.display='block';
+    document.getElementById('statusBar').style.display='block';
+    document.getElementById('statusBar').textContent='🟢 Camera ready — barcode pe point karo';
+    window.parent.postMessage({type:'CAMERA_READY'},'*');
+    if(barcodeDetector)waitForVideoReady(video,function(){startAutoDetect(video)});
+    else window.parent.postMessage({type:'NO_BARCODE_DETECTOR'},'*');
+  }
+  function waitForVideoReady(video,callback){
+    if(video.readyState>=2&&video.videoWidth>0){callback();return;}
+    var tries=0,poll=setInterval(function(){
+      tries++;
+      if(video.readyState>=2&&video.videoWidth>0){clearInterval(poll);callback();}
+      else if(tries>80){clearInterval(poll);callback();}
+    },50);
+  }
+  function startAutoDetect(video){
+    if(scanInterval)clearInterval(scanInterval);
+    scanInterval=setInterval(function(){
+      if(!cameraStream||!barcodeDetector)return;
+      if(video.readyState<2||video.paused||video.ended)return;
+      if(video.videoWidth===0)return;
+      barcodeDetector.detect(video).then(function(barcodes){
+        if(!barcodes.length)return;
+        var code=barcodes[0].rawValue;
+        if(code===lastCode&&cooldown)return;
+        lastCode=code;cooldown=true;
+        setTimeout(function(){cooldown=false;},2500);
+        var flash=document.getElementById('flashOverlay');
+        flash.style.opacity='1';setTimeout(function(){flash.style.opacity='0';},200);
+        document.getElementById('statusBar').textContent='✅ Scanned: '+code;
+        window.parent.postMessage({type:'BARCODE_DETECTED',code:code},'*');
+      }).catch(function(){});
+    },250);
+  }
+  function stopCamera(){
+    if(scanInterval){clearInterval(scanInterval);scanInterval=null;}
+    if(cameraStream){cameraStream.getTracks().forEach(function(t){t.stop()});cameraStream=null;}
+    document.getElementById('video').style.display='none';
+    document.getElementById('scanOverlay').style.display='none';
+    document.getElementById('statusBar').style.display='none';
+    document.getElementById('screenPermission').style.display='flex';
+    var btn=document.getElementById('btnTap');
+    btn.style.display='block';btn.disabled=false;btn.textContent='📷 Start Camera';
+    document.getElementById('spSub').textContent='Camera band hai.';
+  }
+  function showTapButton(msg){
+    document.getElementById('spSub').textContent=msg;
+    document.getElementById('spinner').style.display='none';
+    document.getElementById('btnTap').style.display='block';
+  }
+</script>
+</body>
+</html>
