@@ -8,17 +8,36 @@
   :root{--bci-navy:#1a237e;--bci-blue:#1565c0;--bci-sky:#1e88e5;--green:#2e7d32;--green-l:#43a047;--red:#c62828;--amber:#f9a825;--bg:#0d1117;--card:#161b22;--card2:#1c2230;--border:#30363d;--text:#e6edf3;--sub:#8b949e;--gold:#f0c040}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);padding:10px 10px 40px;min-height:100vh}
+
+  /* HEADER */
   .header{background:linear-gradient(135deg,var(--bci-navy) 0%,#0d1117 100%);border:1px solid #283593;border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
   .bci-logo{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--bci-blue),var(--bci-navy));border:2px solid #3949ab;display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 4px 14px rgba(30,136,229,0.35)}
   .header-title{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;letter-spacing:0.8px;color:#fff}
   .header-sub{font-size:10px;color:#90caf9;margin-top:2px}
+
+  /* STATS */
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px}
   .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 6px;text-align:center}
   .stat .num{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700}
   .stat .lbl{font-size:9px;color:var(--sub);letter-spacing:0.7px;font-weight:600;margin-top:2px}
   .s-blue .num{color:#60a5fa}.s-green .num{color:#4ade80}.s-orange .num{color:#fb923c}
+
+  /* CARD */
   .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:11px}
   .card-title{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;color:#94a3b8;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+
+  /* ORDER META */
+  .order-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+  .order-meta-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .order-field-wrap{display:flex;flex-direction:column;gap:4px}
+  .field-lbl{font-size:9px;color:var(--sub);font-weight:700;letter-spacing:0.7px;text-transform:uppercase}
+  .order-field{background:var(--card2);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:12px;padding:9px 10px;outline:none;width:100%}
+  .order-field::placeholder{color:#4b5563}
+  .order-field:focus{border-color:#3b82f6}
+  #orderNumberDisplay{background:var(--card2);border:1.5px solid #1e3a5f;border-radius:9px;color:#60a5fa;font-size:11px;font-weight:600;padding:9px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  select.order-field{cursor:pointer}
+
+  /* CAMERA */
   #liveStatus{font-size:11px;color:var(--sub);text-align:center;margin-bottom:8px;min-height:16px}
   #cameraWrap{position:relative;width:100%;border-radius:12px;overflow:hidden;background:#000;margin-bottom:8px;border:1px solid var(--border);min-height:340px}
   #cameraFrame{width:100%;height:340px;border:none;display:block}
@@ -29,6 +48,8 @@
   #autoFetchBar{display:none;background:linear-gradient(90deg,#1a237e,#1565c0);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:600;color:#90caf9;align-items:center;gap:8px;margin-bottom:10px}
   .dot-pulse{width:8px;height:8px;background:#60a5fa;border-radius:50%;animation:dp 1s infinite;flex-shrink:0}
   @keyframes dp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+
+  /* PRODUCT PREVIEW */
   #productPreview{display:none;border-radius:12px;padding:14px;margin-bottom:10px;animation:slideIn 0.22s ease;border-left:4px solid transparent}
   @keyframes slideIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
   #productPreview.found{background:rgba(27,94,32,0.15);border-left-color:var(--green-l)}
@@ -40,19 +61,16 @@
   .pv-item .pi-lbl{font-size:9px;color:var(--sub);font-weight:600;letter-spacing:0.4px}
   .pv-item .pi-val{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-top:1px}
   .pi-val.price{color:#fcd34d}.pi-val.stock-ok{color:#4ade80}.pi-val.stock-low{color:#fb923c}.pi-val.stock-zero{color:#f87171}.pi-val.tax{color:#93c5fd}
+
+  /* ACTION PANEL */
   #actionPanel{display:none;animation:slideIn 0.22s ease}
   .action-label{font-size:11px;color:var(--sub);font-weight:600;letter-spacing:0.5px;margin-bottom:7px}
   .qty-ctrl{display:flex;align-items:center;gap:10px;margin-bottom:12px}
   .qty-btn{width:38px;height:38px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   #qtyDisplay{flex:1;background:var(--card2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;text-align:center;padding:6px;outline:none}
   .add-cart-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--bci-blue),var(--bci-navy));border:none;border-radius:12px;color:white;font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 14px rgba(21,101,192,0.35)}
-  .order-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-  .order-field-wrap{display:flex;flex-direction:column;gap:4px}
-  .field-lbl{font-size:9px;color:var(--sub);font-weight:700;letter-spacing:0.7px;text-transform:uppercase}
-  .order-field{background:var(--card2);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:12px;padding:9px 10px;outline:none;width:100%}
-  .order-field::placeholder{color:#4b5563}
-  .order-field:focus{border-color:#3b82f6}
-  #orderNumberDisplay{background:var(--card2);border:1.5px solid #1e3a5f;border-radius:9px;color:#60a5fa;font-size:11px;font-weight:600;padding:9px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  /* CART */
   .cart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
   .cart-badge{background:var(--bci-blue);color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
   .cart-empty{font-size:12px;color:#4b5563;text-align:center;padding:18px 0}
@@ -73,43 +91,76 @@
   #processBtn{display:none;width:100%;padding:16px;background:linear-gradient(135deg,#1b5e20,#2e7d32);border:none;border-radius:14px;color:white;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:10px;box-shadow:0 4px 18px rgba(46,125,50,0.4);animation:glowGreen 2s infinite}
   @keyframes glowGreen{0%,100%{box-shadow:0 0 18px rgba(46,125,50,0.3)}50%{box-shadow:0 0 28px rgba(46,125,50,0.6)}}
   #processBtn:disabled{opacity:0.5;animation:none;cursor:not-allowed}
+
+  /* MANUAL */
   .manual-row{display:flex;gap:8px}
   .sku-field{flex:1;background:var(--card2);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;padding:11px 12px;outline:none}
   .sku-field::placeholder{color:#4b5563}
   .sku-field:focus{border-color:#3b82f6}
   .go-btn{padding:11px 16px;background:var(--bci-blue);color:white;border:none;border-radius:10px;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;cursor:pointer}
+
+  /* PROCESSING OVERLAY */
   #processingOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center;padding:24px}
   .proc-spinner{width:50px;height:50px;border:4px solid #1e3a5f;border-top-color:#60a5fa;border-radius:50%;animation:spin 0.8s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   .proc-msg{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:#90caf9}
   .proc-sub{font-size:12px;color:var(--sub)}
-  #invoiceModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:998;overflow-y:auto;padding:16px}
-  .invoice-box{background:#fff;color:#111;border-radius:14px;padding:0;overflow:hidden;max-width:600px;margin:0 auto 20px;font-family:Arial,sans-serif}
-  .inv-header{background:linear-gradient(135deg,#1a237e,#1565c0);color:white;padding:22px 24px 18px;text-align:center}
-  .inv-bci-logo{display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.35);border-radius:14px;font-size:22px;font-weight:900;margin-bottom:10px;font-family:Arial,sans-serif}
-  .inv-company{font-size:18px;font-weight:800;margin-bottom:3px}
-  .inv-tag{display:inline-block;margin-top:10px;background:rgba(255,255,255,0.18);padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1.5px}
-  .inv-meta{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #e0e0e0}
-  .inv-meta-cell{padding:10px 16px;font-size:11px;border-right:1px solid #e0e0e0}
-  .inv-meta-cell:nth-child(even){border-right:none}
-  .inv-meta-cell:nth-child(3),.inv-meta-cell:nth-child(4){border-top:1px solid #e0e0e0}
-  .inv-meta-lbl{color:#777;font-size:9px;font-weight:700;text-transform:uppercase;margin-bottom:2px}
+
+  /* INVOICE MODAL */
+  #invoiceModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:998;overflow-y:auto;padding:12px}
+  .invoice-box{background:#fff;color:#111;border-radius:16px;overflow:hidden;max-width:600px;margin:0 auto 16px;font-family:Arial,sans-serif;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
+
+  /* Invoice Header */
+  .inv-header{background:linear-gradient(160deg,#1a237e 0%,#1565c0 100%);color:white;padding:20px 22px 16px;text-align:center}
+  .inv-bci-logo{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;background:rgba(255,255,255,0.15);border:2.5px solid rgba(255,255,255,0.4);border-radius:14px;font-size:24px;font-weight:900;margin-bottom:8px;font-family:Arial,sans-serif}
+  .inv-company{font-size:17px;font-weight:800;margin-bottom:2px;letter-spacing:0.5px}
+  .inv-address{font-size:9px;color:#bbdefb;margin-bottom:8px}
+  .inv-tag{display:inline-block;background:rgba(255,255,255,0.2);padding:4px 16px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1.5px}
+
+  /* Invoice Meta */
+  .inv-meta{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid #e0e0e0}
+  .inv-meta-cell{padding:9px 14px;font-size:11px}
+  .inv-meta-cell:nth-child(odd){border-right:1px solid #e0e0e0}
+  .inv-meta-cell+.inv-meta-cell+.inv-meta-cell{border-top:1px solid #e0e0e0}
+  .inv-meta-cell:nth-child(4){border-top:1px solid #e0e0e0}
+  .inv-meta-cell:nth-child(5){border-top:1px solid #e0e0e0;border-right:1px solid #e0e0e0}
+  .inv-meta-cell:nth-child(6){border-top:1px solid #e0e0e0}
+  .inv-meta-lbl{color:#777;font-size:9px;font-weight:700;text-transform:uppercase;margin-bottom:2px;letter-spacing:0.3px}
   .inv-meta-val{color:#111;font-weight:700;font-size:12px}
-  .inv-body{padding:0 16px 16px}
-  .inv-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:10px}
-  .inv-table th{background:#1a237e;color:white;padding:7px 5px;text-align:center;font-weight:700;font-size:9px}
-  .inv-table td{padding:7px 5px;text-align:center;border-bottom:1px solid #f0f0f0}
-  .inv-table td.left{text-align:left}
-  .inv-table tr:nth-child(even) td{background:#f5f5f5}
-  .inv-totals{margin-top:12px;border-top:2px solid #e0e0e0;padding-top:10px}
-  .inv-tot-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px;color:#555}
-  .inv-grand{border-top:2px solid #1a237e;margin-top:6px;padding:10px 0 0}
+  .payment-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:700;background:#e8f5e9;color:#2e7d32}
+
+  /* Invoice Table */
+  .inv-body{padding:0 14px 14px}
+  .inv-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:10px}
+  .inv-table th{background:#1a237e;color:white;padding:7px 4px;text-align:center;font-weight:700;font-size:8.5px;letter-spacing:0.3px}
+  .inv-table td{padding:7px 4px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:10px}
+  .inv-table td.left{text-align:left;padding-left:8px}
+  .inv-table tr:nth-child(even) td{background:#f5f7ff}
+  .inv-table tfoot td{background:#e8eaf6;font-weight:700;border-top:2px solid #9fa8da}
+
+  /* Totals */
+  .inv-totals{margin-top:10px;border-top:1px solid #e0e0e0;padding-top:10px}
+  .inv-tot-row{display:flex;justify-content:space-between;padding:3px 0;font-size:12px;color:#555}
+  .inv-grand{border-top:2px solid #1a237e;margin-top:6px;padding:10px 0 4px;display:flex;justify-content:space-between;align-items:center}
   .inv-grand-lbl{font-size:14px;font-weight:800;color:#1a237e}
-  .inv-grand-val{font-size:18px;font-weight:900;color:#1a237e}
-  .inv-footer{background:#f5f5f5;border-top:1px solid #e0e0e0;padding:12px 16px;text-align:center;font-size:10px;color:#777;font-style:italic}
-  .inv-actions{display:flex;gap:10px;margin:12px 0 4px}
-  .btn-pdf{flex:1;padding:13px;background:linear-gradient(135deg,#1a237e,#1565c0);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;cursor:pointer}
-  .btn-new{flex:1;padding:13px;background:linear-gradient(135deg,#2e7d32,#1b5e20);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;cursor:pointer}
+  .inv-grand-val{font-size:20px;font-weight:900;color:#1a237e}
+  .inv-words{background:#e8f5e9;border-radius:8px;padding:7px 10px;font-size:10px;font-style:italic;color:#2e7d32;font-weight:600;margin-top:8px}
+
+  /* Paid stamp */
+  .inv-paid-row{display:flex;gap:8px;margin-top:10px;align-items:stretch}
+  .paid-stamp{flex:1;background:#2e7d32;border-radius:10px;padding:10px;text-align:center;color:white;font-weight:800;font-size:14px;letter-spacing:1px}
+  .paid-stamp span{display:block;font-size:9px;font-weight:400;margin-top:2px;opacity:0.85}
+  .sig-box{flex:1;border:1.5px dashed #bbb;border-radius:10px;padding:10px;text-align:center;font-size:9px;color:#999}
+
+  .inv-footer{background:#e3f2fd;border-top:1px solid #bbdefb;padding:10px 14px;text-align:center;font-size:9px;color:#555;font-style:italic}
+
+  /* Action buttons */
+  .inv-actions{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
+  .btn-pdf{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#1a237e,#1565c0);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center}
+  .btn-wa{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#1b5e20,#2e7d32);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer}
+  .btn-new{width:100%;padding:13px;background:linear-gradient(135deg,#4a148c,#6a1b9a);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;cursor:pointer;margin-top:4px}
+
+  /* Log */
   .log-list{max-height:160px;overflow-y:auto}
   .log-item{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px}
   .log-item:last-child{border-bottom:none}
@@ -124,9 +175,8 @@
 </head>
 <body>
 
-<!-- ⚠️ APNA APPS SCRIPT URL YAHAN DAALO -->
 <script>
-  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTm2hFVetGdH_AFKSWWJTqYxhQEjDgw19dTsJTA3w5JlCFONQeiYjQzsEPFeJdGwSRug/exec";
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw0ym6Hjx578WfB8ffeM5cDl2721GfiGpfa4yBtWui-_9p0tu5St-QBQu7AzKQ4agrZxQ/exec";
 </script>
 
 <!-- PROCESSING OVERLAY -->
@@ -139,41 +189,65 @@
 <!-- INVOICE MODAL -->
 <div id="invoiceModal">
   <div class="invoice-box">
+    <!-- Header -->
     <div class="inv-header">
       <div class="inv-bci-logo">BCI</div>
       <div class="inv-company">BUSINESS COACHING INDIA LLP</div>
-      <div class="inv-tag">GST TAX INVOICE</div>
+      <div class="inv-address">New Delhi, India &nbsp;|&nbsp; GSTIN: 07AAQFB1234P1Z5 &nbsp;|&nbsp; +91-9999999999</div>
+      <div class="inv-tag">★ GST TAX INVOICE ★</div>
     </div>
+
+    <!-- Meta -->
     <div class="inv-meta">
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Order Number</div><div class="inv-meta-val" id="invOrderNum">—</div></div>
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Date</div><div class="inv-meta-val" id="invDate">—</div></div>
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Customer</div><div class="inv-meta-val" id="invCustomer">—</div></div>
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Time</div><div class="inv-meta-val" id="invTime">—</div></div>
+      <div class="inv-meta-cell"><div class="inv-meta-lbl">Phone</div><div class="inv-meta-val" id="invPhone">—</div></div>
+      <div class="inv-meta-cell"><div class="inv-meta-lbl">Payment</div><div class="inv-meta-val"><span class="payment-badge" id="invPayment">Cash</span></div></div>
     </div>
+
+    <!-- Table -->
     <div class="inv-body">
       <table class="inv-table">
         <thead><tr><th>#</th><th>SKU</th><th>Product</th><th>Qty</th><th>Rate</th><th>SGST%</th><th>SGST(₹)</th><th>IGST%</th><th>IGST(₹)</th><th>Total</th></tr></thead>
         <tbody id="invTableBody"></tbody>
       </table>
+
+      <!-- Totals -->
       <div class="inv-totals">
         <div class="inv-tot-row"><span>Sub Total</span><span id="invSubTotal">₹0.00</span></div>
         <div class="inv-tot-row"><span>Total SGST</span><span id="invTotalSGST">₹0.00</span></div>
         <div class="inv-tot-row"><span>Total IGST</span><span id="invTotalIGST">₹0.00</span></div>
-        <div class="inv-tot-row inv-grand"><span class="inv-grand-lbl">GRAND TOTAL</span><span class="inv-grand-val" id="invGrandTotal">₹0.00</span></div>
+        <div class="inv-grand">
+          <span class="inv-grand-lbl">GRAND TOTAL</span>
+          <span class="inv-grand-val" id="invGrandTotal">₹0.00</span>
+        </div>
+        <div class="inv-words" id="invWords">—</div>
+      </div>
+
+      <!-- Paid stamp -->
+      <div class="inv-paid-row">
+        <div class="paid-stamp">✔ PAID<span id="invPaidMode">via Cash</span></div>
+        <div class="sig-box">Authorised Signatory<br><br><br>________________</div>
       </div>
     </div>
-    <div class="inv-footer">Thank you for your business! | Business Coaching India LLP | BCI</div>
+
+    <div class="inv-footer">This is a computer generated invoice &nbsp;|&nbsp; Business Coaching India LLP &nbsp;|&nbsp; Thank you for your business!</div>
   </div>
+
+  <!-- Buttons -->
   <div class="inv-actions">
     <button class="btn-pdf" id="btnOpenPDF">📄 Open PDF</button>
-    <button class="btn-new" onclick="startNewOrder()">➕ New Order</button>
+    <button class="btn-wa" id="btnWhatsApp">📲 WhatsApp</button>
   </div>
+  <button class="btn-new" onclick="startNewOrder()">➕ New Order</button>
 </div>
 
 <!-- HEADER -->
 <div class="header">
   <div class="bci-logo">BCI</div>
-  <div class="header-text">
+  <div>
     <div class="header-title">BCI SKU SCANNER</div>
     <div class="header-sub">Business Coaching India LLP · Billing System</div>
   </div>
@@ -198,6 +272,22 @@
     <div class="order-field-wrap">
       <div class="field-lbl">Customer Name</div>
       <input class="order-field" type="text" id="customerName" placeholder="Walk-in Customer">
+    </div>
+  </div>
+  <div class="order-meta-3">
+    <div class="order-field-wrap" style="grid-column:span 2">
+      <div class="field-lbl">Customer Phone</div>
+      <input class="order-field" type="tel" id="customerPhone" placeholder="+91 XXXXX XXXXX">
+    </div>
+    <div class="order-field-wrap">
+      <div class="field-lbl">Payment Mode</div>
+      <select class="order-field" id="paymentMode">
+        <option value="Cash">💵 Cash</option>
+        <option value="UPI">📱 UPI</option>
+        <option value="Card">💳 Card</option>
+        <option value="Cheque">🏦 Cheque</option>
+        <option value="Bank Transfer">🔁 Bank Transfer</option>
+      </select>
     </div>
   </div>
 </div>
@@ -277,7 +367,20 @@
     return 'BCI-'+now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'-'+pad(now.getHours())+pad(now.getMinutes())+pad(now.getSeconds());
   }
 
-  // ── Frame Messages ──
+  // Amount in words (Indian format) — mirrors GAS version
+  function amountInWords(amount){
+    var ones=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
+    var tens=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+    function cvtH(n){var r='';if(n>=100){r+=ones[Math.floor(n/100)]+' Hundred ';n=n%100;}if(n>=20){r+=tens[Math.floor(n/10)]+' ';n=n%10;}if(n>0)r+=ones[n]+' ';return r;}
+    var n=Math.round(amount); if(n===0)return 'Zero Rupees Only';
+    var res='';
+    if(n>=10000000){res+=cvtH(Math.floor(n/10000000))+'Crore ';n=n%10000000;}
+    if(n>=100000){res+=cvtH(Math.floor(n/100000))+'Lakh ';n=n%100000;}
+    if(n>=1000){res+=cvtH(Math.floor(n/1000))+'Thousand ';n=n%1000;}
+    if(n>0)res+=cvtH(n);
+    return 'Rupees '+res.trim()+' Only';
+  }
+
   function onFrameMessage(e){
     var d=e.data; if(!d||typeof d!=='object')return;
     if(d.type==='CAMERA_READY'){document.getElementById('liveBadge').style.display='block';document.getElementById('liveStatus').textContent='🟢 Barcode pe point karo — auto scan hoga';}
@@ -292,29 +395,20 @@
     document.getElementById('liveStatus').textContent='⏹ Camera band hai';
   }
 
-  // ── FIX 1: Removed duplicate 'function' keyword ──
   function fetchSku(skuCode){
     skuCode=skuCode.trim().toUpperCase();
     document.getElementById('skuInput').value=skuCode;
-    fetch(SCRIPT_URL+'?action=lookup&sku='+encodeURIComponent(skuCode),{
-      method:'GET',
-      redirect:'follow'
-    })
+    fetch(SCRIPT_URL+'?action=lookup&sku='+encodeURIComponent(skuCode),{method:'GET',redirect:'follow'})
     .then(function(r){return r.json();})
     .then(function(result){
-      window._lastResult=result;
-      pendingSku=skuCode;
-      showProductPreview(result,skuCode);
-      hideAutoFetch();
-      document.getElementById('liveStatus').textContent=result.found
-        ?'✅ '+result.name+' — qty set karo & ADD TO CART'
-        :'❌ SKU nahi mila: '+skuCode;
+      window._lastResult=result; pendingSku=skuCode;
+      showProductPreview(result,skuCode); hideAutoFetch();
+      document.getElementById('liveStatus').textContent=result.found?'✅ '+result.name+' — qty set karo & ADD TO CART':'❌ SKU nahi mila: '+skuCode;
     })
-    .catch(function(err){
+    .catch(function(){
       hideAutoFetch();
       document.getElementById('liveStatus').textContent='⚠️ Connection error — Script URL check karo';
-      document.getElementById('productPreview').style.display='none';
-      document.getElementById('actionPanel').style.display='none';
+      hidePanels();
     });
   }
 
@@ -326,7 +420,6 @@
     document.getElementById('skuInput').value='';
   }
 
-  // ── Product Preview ──
   function showProductPreview(result,sku){
     var box=document.getElementById('productPreview'),panel=document.getElementById('actionPanel');
     box.style.display='none';void box.offsetWidth;box.style.display='block';
@@ -350,7 +443,6 @@
     }
   }
 
-  // ── Cart ──
   function addToCart(){
     if(!pendingSku||!window._lastResult||!window._lastResult.found)return;
     var qty=parseInt(document.getElementById('qtyDisplay').value)||1;
@@ -388,34 +480,34 @@
     totBar.style.display='block';procBtn.style.display='block';
   }
 
-  // ── Process Order via GET (fixes CORS block from GitHub Pages) ──
   function processOrder(){
     if(!cart.length){alert('Cart is empty!');return;}
-    var customerName=document.getElementById('customerName').value.trim()||'Walk-in Customer';
+    var customerName =document.getElementById('customerName').value.trim()  || 'Walk-in Customer';
+    var customerPhone=document.getElementById('customerPhone').value.trim()  || '';
+    var paymentMode  =document.getElementById('paymentMode').value           || 'Cash';
+
     document.getElementById('processBtn').disabled=true;
     document.getElementById('procMsg').textContent='💾 Saving data...';
     document.getElementById('procSub').textContent='Writing to Scan Log & Store sheets';
     document.getElementById('processingOverlay').style.display='flex';
 
     setTimeout(function(){
-      document.getElementById('procMsg').textContent='📄 Generating Invoice...';
-      document.getElementById('procSub').textContent='Creating PDF & saving to Drive';
+      document.getElementById('procMsg').textContent='📄 Generating Invoice PDF...';
+      document.getElementById('procSub').textContent='Creating PDF & saving to Drive folder';
     },1500);
 
     var orderData={
-      orderNumber:currentOrder,
-      customerName:customerName,
-      items:cart.map(function(item){
+      orderNumber  : currentOrder,
+      customerName : customerName,
+      customerPhone: customerPhone,
+      paymentMode  : paymentMode,
+      items: cart.map(function(item){
         return{sku:item.sku,name:item.name,category:item.category,qty:item.qty,price:item.price,sgst:item.sgst,igst:item.igst};
       })
     };
 
-    // GET request with encoded JSON — avoids CORS preflight block
     var encodedData=encodeURIComponent(JSON.stringify(orderData));
-    fetch(SCRIPT_URL+'?action=processOrder&data='+encodedData,{
-      method:'GET',
-      redirect:'follow'
-    })
+    fetch(SCRIPT_URL+'?action=processOrder&data='+encodedData,{method:'GET',redirect:'follow'})
     .then(function(r){return r.json();})
     .then(function(res){
       document.getElementById('processingOverlay').style.display='none';
@@ -434,28 +526,48 @@
     });
   }
 
-  // ── Invoice Modal ──
   function showInvoiceModal(res){
-    document.getElementById('invOrderNum').textContent=res.orderNumber;
-    document.getElementById('invDate').textContent=res.dateStr;
-    document.getElementById('invTime').textContent=res.timeStr;
-    document.getElementById('invCustomer').textContent=res.customerName;
-    document.getElementById('invSubTotal').textContent='₹'+res.subTotal;
-    document.getElementById('invTotalSGST').textContent='₹'+res.totalSGST;
-    document.getElementById('invTotalIGST').textContent='₹'+res.totalIGST;
-    document.getElementById('invGrandTotal').textContent='₹'+res.grandTotal;
+    var payMode = res.paymentMode || 'Cash';
+    document.getElementById('invOrderNum').textContent  = res.orderNumber;
+    document.getElementById('invDate').textContent      = res.dateStr;
+    document.getElementById('invTime').textContent      = res.timeStr;
+    document.getElementById('invCustomer').textContent  = res.customerName;
+    document.getElementById('invPhone').textContent     = res.customerPhone || 'N/A';
+    document.getElementById('invPayment').textContent   = payMode;
+    document.getElementById('invSubTotal').textContent  = '₹'+res.subTotal;
+    document.getElementById('invTotalSGST').textContent = '₹'+res.totalSGST;
+    document.getElementById('invTotalIGST').textContent = '₹'+res.totalIGST;
+    document.getElementById('invGrandTotal').textContent= '₹'+res.grandTotal;
+    document.getElementById('invWords').textContent     = amountInWords(parseFloat(res.grandTotal));
+    document.getElementById('invPaidMode').textContent  = 'via '+payMode;
+
     var tbody=document.getElementById('invTableBody'),rows='',items=res.items||[];
     for(var i=0;i<items.length;i++){
       var it=items[i];
       rows+='<tr><td>'+(i+1)+'</td><td>'+esc(it.sku)+'</td><td class="left">'+esc(it.name)+'</td><td>'+it.qty+'</td><td>₹'+parseFloat(it.price).toFixed(2)+'</td><td>'+it.sgst+'%</td><td>₹'+parseFloat(it.sgstAmt).toFixed(2)+'</td><td>'+it.igst+'%</td><td>₹'+parseFloat(it.igstAmt).toFixed(2)+'</td><td><strong>₹'+parseFloat(it.lineTotal).toFixed(2)+'</strong></td></tr>';
     }
     tbody.innerHTML=rows;
+
+    // PDF button
     if(res.pdfUrl){
       document.getElementById('btnOpenPDF').onclick=function(){window.open(res.pdfUrl,'_blank');};
       document.getElementById('btnOpenPDF').style.display='block';
     } else {
       document.getElementById('btnOpenPDF').style.display='none';
     }
+
+    // WhatsApp share button
+    var waMsg = '🧾 *BCI Invoice*\n'
+      +'Order: '+res.orderNumber+'\n'
+      +'Customer: '+res.customerName+'\n'
+      +'Date: '+res.dateStr+' '+res.timeStr+'\n'
+      +'Payment: '+payMode+'\n'
+      +'Amount: *₹'+res.grandTotal+'*\n'
+      +(res.pdfUrl ? '📄 PDF: '+res.pdfUrl : '');
+    document.getElementById('btnWhatsApp').onclick=function(){
+      window.open('https://wa.me/?text='+encodeURIComponent(waMsg),'_blank');
+    };
+
     document.getElementById('invoiceModal').style.display='block';
   }
 
@@ -465,6 +577,8 @@
     currentOrder=genOrderNum();
     document.getElementById('orderNumberDisplay').textContent=currentOrder;
     document.getElementById('customerName').value='';
+    document.getElementById('customerPhone').value='';
+    document.getElementById('paymentMode').value='Cash';
     document.getElementById('liveStatus').textContent='🟢 Naya order — scan karo';
     try{document.getElementById('cameraFrame').contentWindow.postMessage({type:'RESUME_SCAN'},'*')}catch(e){}
     refreshStats();
@@ -472,7 +586,6 @@
 
   function changeQty(delta){var el=document.getElementById('qtyDisplay');el.value=Math.max(1,(parseInt(el.value)||1)+delta);}
 
-  // ── Stats ──
   function refreshStats(){
     fetch(SCRIPT_URL+'?action=summary')
     .then(function(r){return r.json();})
