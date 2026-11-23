@@ -8,36 +8,17 @@
   :root{--bci-navy:#1a237e;--bci-blue:#1565c0;--bci-sky:#1e88e5;--green:#2e7d32;--green-l:#43a047;--red:#c62828;--amber:#f9a825;--bg:#0d1117;--card:#161b22;--card2:#1c2230;--border:#30363d;--text:#e6edf3;--sub:#8b949e;--gold:#f0c040}
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--bg);font-family:'Inter',sans-serif;color:var(--text);padding:10px 10px 40px;min-height:100vh}
-
-  /* HEADER */
   .header{background:linear-gradient(135deg,var(--bci-navy) 0%,#0d1117 100%);border:1px solid #283593;border-radius:16px;padding:14px 16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
   .bci-logo{width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--bci-blue),var(--bci-navy));border:2px solid #3949ab;display:flex;align-items:center;justify-content:center;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 4px 14px rgba(30,136,229,0.35)}
   .header-title{font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;letter-spacing:0.8px;color:#fff}
   .header-sub{font-size:10px;color:#90caf9;margin-top:2px}
-
-  /* STATS */
   .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:12px}
   .stat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 6px;text-align:center}
   .stat .num{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700}
   .stat .lbl{font-size:9px;color:var(--sub);letter-spacing:0.7px;font-weight:600;margin-top:2px}
   .s-blue .num{color:#60a5fa}.s-green .num{color:#4ade80}.s-orange .num{color:#fb923c}
-
-  /* CARD */
   .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:11px}
   .card-title{font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;letter-spacing:1px;color:#94a3b8;margin-bottom:12px;display:flex;align-items:center;gap:6px}
-
-  /* ORDER META */
-  .order-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
-  .order-meta-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-  .order-field-wrap{display:flex;flex-direction:column;gap:4px}
-  .field-lbl{font-size:9px;color:var(--sub);font-weight:700;letter-spacing:0.7px;text-transform:uppercase}
-  .order-field{background:var(--card2);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:12px;padding:9px 10px;outline:none;width:100%}
-  .order-field::placeholder{color:#4b5563}
-  .order-field:focus{border-color:#3b82f6}
-  #orderNumberDisplay{background:var(--card2);border:1.5px solid #1e3a5f;border-radius:9px;color:#60a5fa;font-size:11px;font-weight:600;padding:9px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  select.order-field{cursor:pointer}
-
-  /* CAMERA */
   #liveStatus{font-size:11px;color:var(--sub);text-align:center;margin-bottom:8px;min-height:16px}
   #cameraWrap{position:relative;width:100%;border-radius:12px;overflow:hidden;background:#000;margin-bottom:8px;border:1px solid var(--border);min-height:340px}
   #cameraFrame{width:100%;height:340px;border:none;display:block}
@@ -48,8 +29,6 @@
   #autoFetchBar{display:none;background:linear-gradient(90deg,#1a237e,#1565c0);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:600;color:#90caf9;align-items:center;gap:8px;margin-bottom:10px}
   .dot-pulse{width:8px;height:8px;background:#60a5fa;border-radius:50%;animation:dp 1s infinite;flex-shrink:0}
   @keyframes dp{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
-
-  /* PRODUCT PREVIEW */
   #productPreview{display:none;border-radius:12px;padding:14px;margin-bottom:10px;animation:slideIn 0.22s ease;border-left:4px solid transparent}
   @keyframes slideIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
   #productPreview.found{background:rgba(27,94,32,0.15);border-left-color:var(--green-l)}
@@ -61,16 +40,19 @@
   .pv-item .pi-lbl{font-size:9px;color:var(--sub);font-weight:600;letter-spacing:0.4px}
   .pv-item .pi-val{font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;margin-top:1px}
   .pi-val.price{color:#fcd34d}.pi-val.stock-ok{color:#4ade80}.pi-val.stock-low{color:#fb923c}.pi-val.stock-zero{color:#f87171}.pi-val.tax{color:#93c5fd}
-
-  /* ACTION PANEL */
   #actionPanel{display:none;animation:slideIn 0.22s ease}
   .action-label{font-size:11px;color:var(--sub);font-weight:600;letter-spacing:0.5px;margin-bottom:7px}
   .qty-ctrl{display:flex;align-items:center;gap:10px;margin-bottom:12px}
   .qty-btn{width:38px;height:38px;background:var(--card2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:20px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   #qtyDisplay{flex:1;background:var(--card2);border:1.5px solid var(--border);border-radius:8px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:24px;font-weight:700;text-align:center;padding:6px;outline:none}
   .add-cart-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--bci-blue),var(--bci-navy));border:none;border-radius:12px;color:white;font-family:'Rajdhani',sans-serif;font-size:19px;font-weight:700;letter-spacing:1px;cursor:pointer;box-shadow:0 4px 14px rgba(21,101,192,0.35)}
-
-  /* CART */
+  .order-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+  .order-field-wrap{display:flex;flex-direction:column;gap:4px}
+  .field-lbl{font-size:9px;color:var(--sub);font-weight:700;letter-spacing:0.7px;text-transform:uppercase}
+  .order-field{background:var(--card2);border:1.5px solid var(--border);border-radius:9px;color:var(--text);font-size:12px;padding:9px 10px;outline:none;width:100%}
+  .order-field::placeholder{color:#4b5563}
+  .order-field:focus{border-color:#3b82f6}
+  #orderNumberDisplay{background:var(--card2);border:1.5px solid #1e3a5f;border-radius:9px;color:#60a5fa;font-size:11px;font-weight:600;padding:9px 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .cart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
   .cart-badge{background:var(--bci-blue);color:white;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
   .cart-empty{font-size:12px;color:#4b5563;text-align:center;padding:18px 0}
@@ -80,9 +62,10 @@
   .ci-info{flex:1;min-width:0}
   .ci-name{font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ci-sku{font-size:10px;color:var(--sub)}
-  .ci-qty{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:#60a5fa;white-space:nowrap;flex-shrink:0}
+  .ci-qty{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:#60a5fa;white-space:nowrap;flex-shrink:0;display:flex;align-items:center;gap:4px}
   .ci-total{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:#fcd34d;white-space:nowrap;flex-shrink:0;min-width:64px;text-align:right}
   .ci-del{width:22px;height:22px;border-radius:6px;background:rgba(198,40,40,0.2);border:none;color:#f87171;font-size:13px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+  .ci-step{background:#2a3347;color:#fff}
   #cartTotalsBar{display:none;background:rgba(26,35,126,0.25);border:1px solid #283593;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:12px}
   .ct-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0}
   .ct-lbl{color:var(--sub)}.ct-val{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--text)}
@@ -91,89 +74,43 @@
   #processBtn{display:none;width:100%;padding:16px;background:linear-gradient(135deg,#1b5e20,#2e7d32);border:none;border-radius:14px;color:white;font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:10px;box-shadow:0 4px 18px rgba(46,125,50,0.4);animation:glowGreen 2s infinite}
   @keyframes glowGreen{0%,100%{box-shadow:0 0 18px rgba(46,125,50,0.3)}50%{box-shadow:0 0 28px rgba(46,125,50,0.6)}}
   #processBtn:disabled{opacity:0.5;animation:none;cursor:not-allowed}
-
-  /* MANUAL */
   .manual-row{display:flex;gap:8px}
   .sku-field{flex:1;background:var(--card2);border:1.5px solid var(--border);border-radius:10px;color:var(--text);font-size:13px;padding:11px 12px;outline:none}
   .sku-field::placeholder{color:#4b5563}
   .sku-field:focus{border-color:#3b82f6}
   .go-btn{padding:11px 16px;background:var(--bci-blue);color:white;border:none;border-radius:10px;font-family:'Rajdhani',sans-serif;font-size:15px;font-weight:700;cursor:pointer}
-
-  /* PROCESSING OVERLAY */
   #processingOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:999;align-items:center;justify-content:center;flex-direction:column;gap:16px;text-align:center;padding:24px}
   .proc-spinner{width:50px;height:50px;border:4px solid #1e3a5f;border-top-color:#60a5fa;border-radius:50%;animation:spin 0.8s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   .proc-msg{font-family:'Rajdhani',sans-serif;font-size:18px;font-weight:700;color:#90caf9}
   .proc-sub{font-size:12px;color:var(--sub)}
-
-  /* INVOICE MODAL */
-  #invoiceModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:998;overflow-y:auto;padding:12px}
-  .invoice-box{background:#fff;color:#111;border-radius:16px;overflow:hidden;max-width:600px;margin:0 auto 16px;font-family:Arial,sans-serif;box-shadow:0 8px 40px rgba(0,0,0,0.5)}
-
-  /* Invoice Header */
-  .inv-header{background:linear-gradient(160deg,#1a237e 0%,#1565c0 100%);color:white;padding:20px 22px 16px;text-align:center}
-  .inv-bci-logo{display:inline-flex;align-items:center;justify-content:center;width:58px;height:58px;background:rgba(255,255,255,0.15);border:2.5px solid rgba(255,255,255,0.4);border-radius:14px;font-size:24px;font-weight:900;margin-bottom:8px;font-family:Arial,sans-serif}
-  .inv-company{font-size:17px;font-weight:800;margin-bottom:2px;letter-spacing:0.5px}
-  .inv-address{font-size:9px;color:#bbdefb;margin-bottom:8px}
-  .inv-tag{display:inline-block;background:rgba(255,255,255,0.2);padding:4px 16px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:1.5px}
-
-  /* Invoice Meta */
-  .inv-meta{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid #e0e0e0}
-  .inv-meta-cell{padding:9px 14px;font-size:11px}
-  .inv-meta-cell:nth-child(odd){border-right:1px solid #e0e0e0}
-  .inv-meta-cell+.inv-meta-cell+.inv-meta-cell{border-top:1px solid #e0e0e0}
-  .inv-meta-cell:nth-child(4){border-top:1px solid #e0e0e0}
-  .inv-meta-cell:nth-child(5){border-top:1px solid #e0e0e0;border-right:1px solid #e0e0e0}
-  .inv-meta-cell:nth-child(6){border-top:1px solid #e0e0e0}
-  .inv-meta-cell:nth-child(7){border-top:1px solid #e0e0e0;border-right:1px solid #e0e0e0}
-  .inv-meta-cell:nth-child(8){border-top:1px solid #e0e0e0}
-  .inv-meta-lbl{color:#777;font-size:9px;font-weight:700;text-transform:uppercase;margin-bottom:2px;letter-spacing:0.3px}
+  #invoiceModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:998;overflow-y:auto;padding:16px}
+  .invoice-box{background:#fff;color:#111;border-radius:14px;padding:0;overflow:hidden;max-width:600px;margin:0 auto 20px;font-family:Arial,sans-serif}
+  .inv-header{background:linear-gradient(135deg,#1a237e,#1565c0);color:white;padding:22px 24px 18px;text-align:center}
+  .inv-bci-logo{display:inline-flex;align-items:center;justify-content:center;width:60px;height:60px;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.35);border-radius:14px;font-size:22px;font-weight:900;margin-bottom:10px;font-family:Arial,sans-serif}
+  .inv-company{font-size:18px;font-weight:800;margin-bottom:3px}
+  .inv-tag{display:inline-block;margin-top:10px;background:rgba(255,255,255,0.18);padding:4px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1.5px}
+  .inv-meta{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:1px solid #e0e0e0}
+  .inv-meta-cell{padding:10px 16px;font-size:11px;border-right:1px solid #e0e0e0}
+  .inv-meta-cell:nth-child(even){border-right:none}
+  .inv-meta-cell:nth-child(3),.inv-meta-cell:nth-child(4){border-top:1px solid #e0e0e0}
+  .inv-meta-lbl{color:#777;font-size:9px;font-weight:700;text-transform:uppercase;margin-bottom:2px}
   .inv-meta-val{color:#111;font-weight:700;font-size:12px}
-  .payment-badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:10px;font-weight:700;background:#e8f5e9;color:#2e7d32}
-
-  /* Bank Details Section */
-  .inv-bank{background:#f8f9ff;border-top:1px solid #e0e0e0;border-bottom:1px solid #e0e0e0;padding:10px 14px;display:flex;gap:12px;align-items:flex-start}
-  .inv-bank-info{flex:1}
-  .inv-bank-title{font-size:10px;font-weight:800;color:#1a237e;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
-  .inv-bank-row{font-size:10px;color:#333;margin-bottom:3px}
-  .inv-bank-row span{font-weight:700;color:#111}
-  .inv-qr-wrap{width:80px;flex-shrink:0;text-align:center}
-  .inv-qr-wrap img{width:70px;height:70px;border:2px solid #1a237e;border-radius:6px}
-  .inv-qr-lbl{font-size:8px;color:#777;margin-top:3px;font-weight:700}
-
-  /* Invoice Table */
-  .inv-body{padding:0 14px 14px}
-  .inv-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:10px}
-  .inv-table th{background:#1a237e;color:white;padding:7px 4px;text-align:center;font-weight:700;font-size:8.5px;letter-spacing:0.3px}
-  .inv-table td{padding:7px 4px;text-align:center;border-bottom:1px solid #f0f0f0;font-size:10px}
-  .inv-table td.left{text-align:left;padding-left:8px}
-  .inv-table tr:nth-child(even) td{background:#f5f7ff}
-  .inv-table tfoot td{background:#e8eaf6;font-weight:700;border-top:2px solid #9fa8da}
-
-  /* Totals */
-  .inv-totals{margin-top:10px;border-top:1px solid #e0e0e0;padding-top:10px}
-  .inv-tot-row{display:flex;justify-content:space-between;padding:3px 0;font-size:12px;color:#555}
-  .inv-grand{border-top:2px solid #1a237e;margin-top:6px;padding:10px 0 4px;display:flex;justify-content:space-between;align-items:center}
+  .inv-body{padding:0 16px 16px}
+  .inv-table{width:100%;border-collapse:collapse;margin-top:14px;font-size:10px}
+  .inv-table th{background:#1a237e;color:white;padding:7px 5px;text-align:center;font-weight:700;font-size:9px}
+  .inv-table td{padding:7px 5px;text-align:center;border-bottom:1px solid #f0f0f0}
+  .inv-table td.left{text-align:left}
+  .inv-table tr:nth-child(even) td{background:#f5f5f5}
+  .inv-totals{margin-top:12px;border-top:2px solid #e0e0e0;padding-top:10px}
+  .inv-tot-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px;color:#555}
+  .inv-grand{border-top:2px solid #1a237e;margin-top:6px;padding:10px 0 0}
   .inv-grand-lbl{font-size:14px;font-weight:800;color:#1a237e}
-  .inv-grand-val{font-size:20px;font-weight:900;color:#1a237e}
-  .inv-words{background:#e8f5e9;border-radius:8px;padding:7px 10px;font-size:10px;font-style:italic;color:#2e7d32;font-weight:600;margin-top:8px}
-
-  /* Paid stamp */
-  .inv-paid-row{display:flex;gap:8px;margin-top:10px;align-items:stretch}
-  .paid-stamp{flex:1;background:#2e7d32;border-radius:10px;padding:10px;text-align:center;color:white;font-weight:800;font-size:14px;letter-spacing:1px}
-  .paid-stamp span{display:block;font-size:9px;font-weight:400;margin-top:2px;opacity:0.85}
-  .sig-box{flex:1;border:1.5px dashed #bbb;border-radius:10px;padding:10px;text-align:center;font-size:9px;color:#999}
-
-  .inv-footer{background:#e3f2fd;border-top:1px solid #bbdefb;padding:10px 14px;text-align:center;font-size:9px;color:#555;font-style:italic}
-
-  /* Action buttons */
-  .inv-actions{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
-  .btn-pdf{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#1a237e,#1565c0);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center}
-  .btn-dl{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#e65100,#bf360c);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center}
-  .btn-email{flex:1;min-width:100px;padding:13px 8px;background:linear-gradient(135deg,#00695c,#00897b);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:16px;font-weight:700;cursor:pointer;text-align:center}
-  .btn-new{width:100%;padding:13px;background:linear-gradient(135deg,#4a148c,#6a1b9a);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;cursor:pointer;margin-top:4px}
-
-  /* Log */
+  .inv-grand-val{font-size:18px;font-weight:900;color:#1a237e}
+  .inv-footer{background:#f5f5f5;border-top:1px solid #e0e0e0;padding:12px 16px;text-align:center;font-size:10px;color:#777;font-style:italic}
+  .inv-actions{display:flex;gap:10px;margin:12px 0 4px}
+  .btn-pdf{flex:1;padding:13px;background:linear-gradient(135deg,#1a237e,#1565c0);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;cursor:pointer}
+  .btn-new{flex:1;padding:13px;background:linear-gradient(135deg,#2e7d32,#1b5e20);border:none;border-radius:11px;color:white;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:700;cursor:pointer}
   .log-list{max-height:160px;overflow-y:auto}
   .log-item{display:flex;align-items:center;gap:7px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:11px}
   .log-item:last-child{border-bottom:none}
@@ -184,26 +121,13 @@
   .log-qty{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:12px;flex-shrink:0}
   .q-in{color:#4ade80}.q-out{color:#fb923c}
   .refresh-btn{width:100%;margin-top:10px;padding:9px;background:var(--card2);border:1px solid var(--border);border-radius:10px;color:var(--sub);font-size:12px;font-weight:600;cursor:pointer}
-
-  /* Email reminder status */
-  #emailStatus{font-size:11px;margin-top:6px;text-align:center;min-height:16px}
-  .es-ok{color:#4ade80}.es-err{color:#f87171}.es-sending{color:#60a5fa}
 </style>
 </head>
 <body>
 
+<!-- ⚠️ APNA APPS SCRIPT URL YAHAN DAALO (Deploy → Web app → /exec URL) -->
 <script>
-  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzs08CyLn8fl-A7QdQHyp0zQm_xRz1HRCMjIbSbyUo3Dw4-q_DjX4VsygptNkXcM83p/exec";
-
-  // ── Bank & UPI details ──
-  var BANK_DETAILS = {
-    accountName : "Chandan Kumar",
-    bankName    : "Kotak Mahindra Bank",
-    accountNo   : "1347884452",
-    ifsc        : "KKBK0004587",
-    branch      : "New Delhi - East of Kailash II",
-    upiId       : "9910725904@kotakbank"
-  };
+  var SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkGG0q7Z67zlWpaxLLj3vpDjytN1h1Zmaz8bq0TZDDo1hreGs83Cj048SBozgNFII3/exec";
 </script>
 
 <!-- PROCESSING OVERLAY -->
@@ -215,88 +139,42 @@
 
 <!-- INVOICE MODAL -->
 <div id="invoiceModal">
-  <div class="invoice-box" id="invoicePrintBox">
-    <!-- Header -->
+  <div class="invoice-box">
     <div class="inv-header">
       <div class="inv-bci-logo">BCI</div>
       <div class="inv-company">BUSINESS COACHING INDIA LLP</div>
-      <div class="inv-address">New Delhi, India &nbsp;|&nbsp; GSTIN: 07AAQFB1234P1Z5 &nbsp;|&nbsp; +91-9999999999</div>
-      <div class="inv-tag">★ GST TAX INVOICE ★</div>
+      <div class="inv-tag">GST TAX INVOICE</div>
     </div>
-
-    <!-- Meta -->
     <div class="inv-meta">
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Order Number</div><div class="inv-meta-val" id="invOrderNum">—</div></div>
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Date</div><div class="inv-meta-val" id="invDate">—</div></div>
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Customer</div><div class="inv-meta-val" id="invCustomer">—</div></div>
       <div class="inv-meta-cell"><div class="inv-meta-lbl">Time</div><div class="inv-meta-val" id="invTime">—</div></div>
-      <div class="inv-meta-cell"><div class="inv-meta-lbl">Phone</div><div class="inv-meta-val" id="invPhone">—</div></div>
-      <div class="inv-meta-cell"><div class="inv-meta-lbl">Payment</div><div class="inv-meta-val"><span class="payment-badge" id="invPayment">Cash</span></div></div>
-      <div class="inv-meta-cell"><div class="inv-meta-lbl">Email</div><div class="inv-meta-val" id="invEmail">—</div></div>
-      <div class="inv-meta-cell"></div>
     </div>
-
-    <!-- Bank Details + QR -->
-    <div class="inv-bank">
-      <div class="inv-bank-info">
-        <div class="inv-bank-title">🏦 Bank Transfer / UPI Payment Details</div>
-        <div class="inv-bank-row">Account Name: <span id="bkName">—</span></div>
-        <div class="inv-bank-row">Bank: <span id="bkBank">—</span></div>
-        <div class="inv-bank-row">Account No: <span id="bkAcc">—</span></div>
-        <div class="inv-bank-row">IFSC: <span id="bkIFSC">—</span></div>
-        <div class="inv-bank-row">Branch: <span id="bkBranch">—</span></div>
-        <div class="inv-bank-row">UPI ID: <span id="bkUPI">—</span></div>
-      </div>
-      <div class="inv-qr-wrap">
-        <!-- QR generated dynamically from UPI ID -->
-        <img id="invQrCode" src="" alt="UPI QR">
-        <div class="inv-qr-lbl">Scan to Pay</div>
-      </div>
-    </div>
-
-    <!-- Table -->
     <div class="inv-body">
       <table class="inv-table">
         <thead><tr><th>#</th><th>SKU</th><th>Product</th><th>Qty</th><th>Rate</th><th>SGST%</th><th>SGST(₹)</th><th>IGST%</th><th>IGST(₹)</th><th>Total</th></tr></thead>
         <tbody id="invTableBody"></tbody>
       </table>
-
-      <!-- Totals -->
       <div class="inv-totals">
         <div class="inv-tot-row"><span>Sub Total</span><span id="invSubTotal">₹0.00</span></div>
         <div class="inv-tot-row"><span>Total SGST</span><span id="invTotalSGST">₹0.00</span></div>
         <div class="inv-tot-row"><span>Total IGST</span><span id="invTotalIGST">₹0.00</span></div>
-        <div class="inv-grand">
-          <span class="inv-grand-lbl">GRAND TOTAL</span>
-          <span class="inv-grand-val" id="invGrandTotal">₹0.00</span>
-        </div>
-        <div class="inv-words" id="invWords">—</div>
-      </div>
-
-      <!-- Paid stamp -->
-      <div class="inv-paid-row">
-        <div class="paid-stamp">✔ PAID<span id="invPaidMode">via Cash</span></div>
-        <div class="sig-box">Authorised Signatory<br><br><br>________________</div>
+        <div class="inv-tot-row inv-grand"><span class="inv-grand-lbl">GRAND TOTAL</span><span class="inv-grand-val" id="invGrandTotal">₹0.00</span></div>
       </div>
     </div>
-
-    <div class="inv-footer">This is a computer generated invoice &nbsp;|&nbsp; Business Coaching India LLP &nbsp;|&nbsp; Thank you for your business!</div>
+    <div class="inv-footer">Thank you for your business! | Business Coaching India LLP | BCI</div>
   </div>
-
-  <!-- Buttons -->
   <div class="inv-actions">
-    <button class="btn-pdf" id="btnOpenPDF">📄 View PDF</button>
-    <button class="btn-dl" id="btnDownload">⬇️ Download</button>
-    <button class="btn-email" id="btnSendEmail" onclick="sendEmailReminder()">📧 Email Bill</button>
+    <button class="btn-pdf" id="btnOpenPDF">📄 Open PDF</button>
+    <button class="btn-new" onclick="startNewOrder()">➕ New Order</button>
   </div>
-  <div id="emailStatus"></div>
-  <button class="btn-new" onclick="startNewOrder()">➕ New Order</button>
 </div>
 
 <!-- HEADER -->
 <div class="header">
   <div class="bci-logo">BCI</div>
-  <div>
+  <div class="header-text">
     <div class="header-title">BCI SKU SCANNER</div>
     <div class="header-sub">Business Coaching India LLP · Billing System</div>
   </div>
@@ -322,24 +200,6 @@
       <div class="field-lbl">Customer Name</div>
       <input class="order-field" type="text" id="customerName" placeholder="Walk-in Customer">
     </div>
-  </div>
-  <div class="order-meta" style="margin-bottom:8px">
-    <div class="order-field-wrap">
-      <div class="field-lbl">Customer Phone</div>
-      <input class="order-field" type="tel" id="customerPhone" placeholder="+91 XXXXX XXXXX">
-    </div>
-    <div class="order-field-wrap">
-      <div class="field-lbl">Customer Email</div>
-      <input class="order-field" type="email" id="customerEmail" placeholder="email@example.com">
-    </div>
-  </div>
-  <div class="order-field-wrap">
-    <div class="field-lbl">Payment Mode</div>
-    <select class="order-field" id="paymentMode">
-      <option value="Cash">💵 Cash</option>
-      <option value="UPI">📱 UPI</option>
-      <option value="Card">💳 Card</option>
-    </select>
   </div>
 </div>
 
@@ -406,7 +266,6 @@
 
 <script>
   var cart=[], pendingSku=null, currentOrder=genOrderNum(), recentLog=[];
-  var currentInvoiceData=null; // stores last processed order response
 
   window.onload=function(){
     document.getElementById('orderNumberDisplay').textContent=currentOrder;
@@ -419,23 +278,11 @@
     return 'BCI-'+now.getFullYear()+pad(now.getMonth()+1)+pad(now.getDate())+'-'+pad(now.getHours())+pad(now.getMinutes())+pad(now.getSeconds());
   }
 
-  function amountInWords(amount){
-    var ones=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
-    var tens=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
-    function cvtH(n){var r='';if(n>=100){r+=ones[Math.floor(n/100)]+' Hundred ';n=n%100;}if(n>=20){r+=tens[Math.floor(n/10)]+' ';n=n%10;}if(n>0)r+=ones[n]+' ';return r;}
-    var n=Math.round(amount); if(n===0)return 'Zero Rupees Only';
-    var res='';
-    if(n>=10000000){res+=cvtH(Math.floor(n/10000000))+'Crore ';n=n%10000000;}
-    if(n>=100000){res+=cvtH(Math.floor(n/100000))+'Lakh ';n=n%100000;}
-    if(n>=1000){res+=cvtH(Math.floor(n/1000))+'Thousand ';n=n%1000;}
-    if(n>0)res+=cvtH(n);
-    return 'Rupees '+res.trim()+' Only';
-  }
-
+  // ── Frame Messages ──
   function onFrameMessage(e){
     var d=e.data; if(!d||typeof d!=='object')return;
     if(d.type==='CAMERA_READY'){document.getElementById('liveBadge').style.display='block';document.getElementById('liveStatus').textContent='🟢 Barcode pe point karo — auto scan hoga';}
-    if(d.type==='BARCODE_DETECTED'){document.getElementById('liveStatus').textContent='✅ Scan: '+d.code;hidePanels();showAutoFetch('📡 Fetch: '+d.code);fetchSku(d.code);beep();}
+    if(d.type==='BARCODE_DETECTED'){document.getElementById('liveStatus').textContent='✅ Scan: '+d.code;hidePanels();showAutoFetch('📡 Fetch: '+d.code);fetchSku(d.code);}
     if(d.type==='CAMERA_ERROR'){document.getElementById('liveBadge').style.display='none';document.getElementById('liveStatus').textContent='❌ Camera error';}
     if(d.type==='NO_BARCODE_DETECTOR'){document.getElementById('liveStatus').textContent='⚠️ Auto-detect nahi — manually enter karo';}
   }
@@ -446,20 +293,32 @@
     document.getElementById('liveStatus').textContent='⏹ Camera band hai';
   }
 
+  // ── Fetch SKU → AUTO ADD TO CART when found ──
   function fetchSku(skuCode){
     skuCode=skuCode.trim().toUpperCase();
     document.getElementById('skuInput').value=skuCode;
-    fetch(SCRIPT_URL+'?action=lookup&sku='+encodeURIComponent(skuCode),{method:'GET',redirect:'follow'})
+    fetch(SCRIPT_URL+'?action=lookup&sku='+encodeURIComponent(skuCode),{
+      method:'GET',
+      redirect:'follow'
+    })
     .then(function(r){return r.json();})
     .then(function(result){
-      window._lastResult=result; pendingSku=skuCode;
-      showProductPreview(result,skuCode); hideAutoFetch();
-      document.getElementById('liveStatus').textContent=result.found?'✅ '+result.name+' — qty set karo & ADD TO CART':'❌ SKU nahi mila: '+skuCode;
+      hideAutoFetch();
+      if(result && result.found){
+        autoAddToCart(result);            // found → add directly, qty 1
+      } else {
+        window._lastResult=result;
+        pendingSku=skuCode;
+        showProductPreview(result,skuCode);   // shows red "SKU Nahi Mila"
+        document.getElementById('liveStatus').textContent='❌ SKU nahi mila: '+skuCode;
+        beepError();
+      }
     })
-    .catch(function(){
+    .catch(function(err){
       hideAutoFetch();
       document.getElementById('liveStatus').textContent='⚠️ Connection error — Script URL check karo';
-      hidePanels();
+      document.getElementById('productPreview').style.display='none';
+      document.getElementById('actionPanel').style.display='none';
     });
   }
 
@@ -471,6 +330,7 @@
     document.getElementById('skuInput').value='';
   }
 
+  // ── Product Preview (used only for "not found" now) ──
   function showProductPreview(result,sku){
     var box=document.getElementById('productPreview'),panel=document.getElementById('actionPanel');
     box.style.display='none';void box.offsetWidth;box.style.display='block';
@@ -494,6 +354,31 @@
     }
   }
 
+  // ── Cart ──
+  function autoAddToCart(r){
+    var idx=cart.findIndex(function(c){return c.sku===r.sku});
+    var newQty;
+    if(idx>=0){ cart[idx].qty+=1; newQty=cart[idx].qty; }
+    else{
+      cart.push({sku:r.sku,name:r.name,category:r.category,price:r.price,
+                 sgst:r.sgst||0,igst:r.igst||0,qty:1});
+      newQty=1;
+    }
+    renderCart();
+    hidePanels();
+    document.getElementById('liveStatus').textContent=
+      '✅ Added: '+r.name+' (×'+newQty+') — next item scan karo';
+    beep();
+    refreshStats();
+  }
+
+  function changeCartQty(i,d){
+    if(!cart[i])return;
+    cart[i].qty=Math.max(1,cart[i].qty+d);
+    renderCart();
+  }
+
+  // Kept for manual qty flow (used if panel is ever shown)
   function addToCart(){
     if(!pendingSku||!window._lastResult||!window._lastResult.found)return;
     var qty=parseInt(document.getElementById('qtyDisplay').value)||1;
@@ -515,12 +400,14 @@
     var el=document.getElementById('cartList'),badge=document.getElementById('cartBadge');
     var totBar=document.getElementById('cartTotalsBar'),procBtn=document.getElementById('processBtn');
     badge.textContent=cart.length+(cart.length===1?' item':' items');
-    if(!cart.length){el.innerHTML='<div class="cart-empty">Cart is empty.</div>';totBar.style.display='none';procBtn.style.display='none';return;}
+    if(!cart.length){el.innerHTML='<div class="cart-empty">Cart is empty. Scan karo.</div>';totBar.style.display='none';procBtn.style.display='none';return;}
     var subTotal=0,totalSGST=0,totalIGST=0,html='';
     for(var i=0;i<cart.length;i++){
       var item=cart[i],lineBase=item.price*item.qty,sgstAmt=lineBase*item.sgst/100,igstAmt=lineBase*item.igst/100,lineTotal=lineBase+sgstAmt+igstAmt;
       subTotal+=lineBase;totalSGST+=sgstAmt;totalIGST+=igstAmt;
-      html+='<div class="cart-item"><span class="ci-num">'+(i+1)+'</span><div class="ci-info"><div class="ci-name">'+esc(item.name)+'</div><div class="ci-sku">'+esc(item.sku)+'</div></div><span class="ci-qty">×'+item.qty+'</span><span class="ci-total">₹'+lineTotal.toFixed(2)+'</span><button class="ci-del" onclick="removeFromCart('+i+')">✕</button></div>';
+      html+='<div class="cart-item"><span class="ci-num">'+(i+1)+'</span><div class="ci-info"><div class="ci-name">'+esc(item.name)+'</div><div class="ci-sku">'+esc(item.sku)+'</div></div>'+
+        '<span class="ci-qty"><button class="ci-del ci-step" onclick="changeCartQty('+i+',-1)">−</button>×'+item.qty+'<button class="ci-del ci-step" onclick="changeCartQty('+i+',1)">+</button></span>'+
+        '<span class="ci-total">₹'+lineTotal.toFixed(2)+'</span><button class="ci-del" onclick="removeFromCart('+i+')">✕</button></div>';
     }
     el.innerHTML=html;
     var grand=subTotal+totalSGST+totalIGST;
@@ -531,36 +418,33 @@
     totBar.style.display='block';procBtn.style.display='block';
   }
 
+  // ── Process Order via GET (avoids CORS preflight block) ──
   function processOrder(){
     if(!cart.length){alert('Cart is empty!');return;}
-    var customerName =document.getElementById('customerName').value.trim()  || 'Walk-in Customer';
-    var customerPhone=document.getElementById('customerPhone').value.trim()  || '';
-    var customerEmail=document.getElementById('customerEmail').value.trim()  || '';
-    var paymentMode  =document.getElementById('paymentMode').value           || 'Cash';
-
+    var customerName=document.getElementById('customerName').value.trim()||'Walk-in Customer';
     document.getElementById('processBtn').disabled=true;
     document.getElementById('procMsg').textContent='💾 Saving data...';
     document.getElementById('procSub').textContent='Writing to Scan Log & Store sheets';
     document.getElementById('processingOverlay').style.display='flex';
 
     setTimeout(function(){
-      document.getElementById('procMsg').textContent='📄 Generating Invoice PDF...';
-      document.getElementById('procSub').textContent='Creating PDF & saving to Drive folder';
+      document.getElementById('procMsg').textContent='📄 Generating Invoice...';
+      document.getElementById('procSub').textContent='Creating PDF & saving to Drive';
     },1500);
 
     var orderData={
-      orderNumber  : currentOrder,
-      customerName : customerName,
-      customerPhone: customerPhone,
-      customerEmail: customerEmail,
-      paymentMode  : paymentMode,
-      items: cart.map(function(item){
+      orderNumber:currentOrder,
+      customerName:customerName,
+      items:cart.map(function(item){
         return{sku:item.sku,name:item.name,category:item.category,qty:item.qty,price:item.price,sgst:item.sgst,igst:item.igst};
       })
     };
 
     var encodedData=encodeURIComponent(JSON.stringify(orderData));
-    fetch(SCRIPT_URL+'?action=processOrder&data='+encodedData,{method:'GET',redirect:'follow'})
+    fetch(SCRIPT_URL+'?action=processOrder&data='+encodedData,{
+      method:'GET',
+      redirect:'follow'
+    })
     .then(function(r){return r.json();})
     .then(function(res){
       document.getElementById('processingOverlay').style.display='none';
@@ -569,7 +453,6 @@
       for(var i=0;i<cart.length;i++) recentLog.unshift({sku:cart[i].sku,name:cart[i].name,found:true,type:'OUT',qty:cart[i].qty});
       if(recentLog.length>30)recentLog.length=30;
       renderLog();
-      currentInvoiceData=res;
       showInvoiceModal(res);
       refreshStats();
     })
@@ -580,125 +463,37 @@
     });
   }
 
+  // ── Invoice Modal ──
   function showInvoiceModal(res){
-    var payMode = res.paymentMode || 'Cash';
-
-    document.getElementById('invOrderNum').textContent  = res.orderNumber;
-    document.getElementById('invDate').textContent      = res.dateStr;
-    document.getElementById('invTime').textContent      = res.timeStr;
-    document.getElementById('invCustomer').textContent  = res.customerName;
-    document.getElementById('invPhone').textContent     = res.customerPhone || 'N/A';
-    document.getElementById('invEmail').textContent     = res.customerEmail || 'N/A';
-    document.getElementById('invPayment').textContent   = payMode;
-    document.getElementById('invSubTotal').textContent  = '₹'+res.subTotal;
-    document.getElementById('invTotalSGST').textContent = '₹'+res.totalSGST;
-    document.getElementById('invTotalIGST').textContent = '₹'+res.totalIGST;
-    document.getElementById('invGrandTotal').textContent= '₹'+res.grandTotal;
-    document.getElementById('invWords').textContent     = amountInWords(parseFloat(res.grandTotal));
-    document.getElementById('invPaidMode').textContent  = 'via '+payMode;
-
-    // Bank details
-    document.getElementById('bkName').textContent   = BANK_DETAILS.accountName;
-    document.getElementById('bkBank').textContent   = BANK_DETAILS.bankName;
-    document.getElementById('bkAcc').textContent    = BANK_DETAILS.accountNo;
-    document.getElementById('bkIFSC').textContent   = BANK_DETAILS.ifsc;
-    document.getElementById('bkBranch').textContent = BANK_DETAILS.branch;
-    document.getElementById('bkUPI').textContent    = BANK_DETAILS.upiId;
-
-    // UPI QR code via Google Charts API
-    var upiString = 'upi://pay?pa='+encodeURIComponent(BANK_DETAILS.upiId)+'&pn='+encodeURIComponent(BANK_DETAILS.accountName)+'&am='+res.grandTotal+'&cu=INR&tn='+encodeURIComponent(res.orderNumber);
-    // Use embedded real Kotak QR code
-    document.getElementById('invQrCode').src = 'data:image/jpeg;base64,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';
-
+    document.getElementById('invOrderNum').textContent=res.orderNumber;
+    document.getElementById('invDate').textContent=res.dateStr;
+    document.getElementById('invTime').textContent=res.timeStr;
+    document.getElementById('invCustomer').textContent=res.customerName;
+    document.getElementById('invSubTotal').textContent='₹'+res.subTotal;
+    document.getElementById('invTotalSGST').textContent='₹'+res.totalSGST;
+    document.getElementById('invTotalIGST').textContent='₹'+res.totalIGST;
+    document.getElementById('invGrandTotal').textContent='₹'+res.grandTotal;
     var tbody=document.getElementById('invTableBody'),rows='',items=res.items||[];
     for(var i=0;i<items.length;i++){
       var it=items[i];
       rows+='<tr><td>'+(i+1)+'</td><td>'+esc(it.sku)+'</td><td class="left">'+esc(it.name)+'</td><td>'+it.qty+'</td><td>₹'+parseFloat(it.price).toFixed(2)+'</td><td>'+it.sgst+'%</td><td>₹'+parseFloat(it.sgstAmt).toFixed(2)+'</td><td>'+it.igst+'%</td><td>₹'+parseFloat(it.igstAmt).toFixed(2)+'</td><td><strong>₹'+parseFloat(it.lineTotal).toFixed(2)+'</strong></td></tr>';
     }
     tbody.innerHTML=rows;
-
-    // View PDF button
     if(res.pdfUrl){
       document.getElementById('btnOpenPDF').onclick=function(){window.open(res.pdfUrl,'_blank');};
       document.getElementById('btnOpenPDF').style.display='block';
-
-      // Download button — triggers direct download via anchor
-      document.getElementById('btnDownload').onclick=function(){
-        var a=document.createElement('a');
-        a.href=res.pdfUrl;
-        a.download='Invoice_'+res.orderNumber+'.pdf';
-        a.target='_blank';
-        a.click();
-      };
-      document.getElementById('btnDownload').style.display='block';
     } else {
       document.getElementById('btnOpenPDF').style.display='none';
-      document.getElementById('btnDownload').style.display='none';
     }
-
-    // Show / hide email button
-    var emailBtn=document.getElementById('btnSendEmail');
-    if(res.customerEmail && res.customerEmail.indexOf('@')>0){
-      emailBtn.style.display='block';
-    } else {
-      emailBtn.style.display='none';
-    }
-    document.getElementById('emailStatus').textContent='';
     document.getElementById('invoiceModal').style.display='block';
-  }
-
-  // ── Send email reminder ──
-  function sendEmailReminder(){
-    if(!currentInvoiceData){return;}
-    var email = currentInvoiceData.customerEmail;
-    if(!email||email.indexOf('@')<0){alert('Valid email nahi hai!');return;}
-
-    var btn=document.getElementById('btnSendEmail');
-    btn.disabled=true;
-    setEmailStatus('sending','📧 Email bheja ja raha hai...');
-
-    var payload = encodeURIComponent(JSON.stringify({
-      to          : email,
-      customerName: currentInvoiceData.customerName,
-      orderNumber : currentInvoiceData.orderNumber,
-      grandTotal  : currentInvoiceData.grandTotal,
-      dateStr     : currentInvoiceData.dateStr,
-      paymentMode : currentInvoiceData.paymentMode,
-      pdfUrl      : currentInvoiceData.pdfUrl || ''
-    }));
-
-    fetch(SCRIPT_URL+'?action=sendEmail&data='+payload,{method:'GET',redirect:'follow'})
-    .then(function(r){return r.json();})
-    .then(function(res){
-      btn.disabled=false;
-      if(res.success){
-        setEmailStatus('ok','✅ Email successfully bheja gaya: '+email);
-      } else {
-        setEmailStatus('err','❌ Email error: '+(res.error||'Unknown'));
-      }
-    })
-    .catch(function(err){
-      btn.disabled=false;
-      setEmailStatus('err','❌ Connection error: '+err.message);
-    });
-  }
-
-  function setEmailStatus(type,msg){
-    var el=document.getElementById('emailStatus');
-    el.className='email-status es-'+type;
-    el.textContent=msg;
   }
 
   function startNewOrder(){
     document.getElementById('invoiceModal').style.display='none';
     cart=[];renderCart();
     currentOrder=genOrderNum();
-    currentInvoiceData=null;
     document.getElementById('orderNumberDisplay').textContent=currentOrder;
     document.getElementById('customerName').value='';
-    document.getElementById('customerPhone').value='';
-    document.getElementById('customerEmail').value='';
-    document.getElementById('paymentMode').value='Cash';
     document.getElementById('liveStatus').textContent='🟢 Naya order — scan karo';
     try{document.getElementById('cameraFrame').contentWindow.postMessage({type:'RESUME_SCAN'},'*')}catch(e){}
     refreshStats();
@@ -706,6 +501,7 @@
 
   function changeQty(delta){var el=document.getElementById('qtyDisplay');el.value=Math.max(1,(parseInt(el.value)||1)+delta);}
 
+  // ── Stats ──
   function refreshStats(){
     fetch(SCRIPT_URL+'?action=summary')
     .then(function(r){return r.json();})
@@ -732,6 +528,7 @@
   function hideAutoFetch(){document.getElementById('autoFetchBar').style.display='none';}
   function hidePanels(){document.getElementById('productPreview').style.display='none';document.getElementById('actionPanel').style.display='none';}
   function beep(){try{var ctx=new(window.AudioContext||window.webkitAudioContext)(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.type='square';osc.frequency.value=1100;gain.gain.setValueAtTime(0.2,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.1);osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.1);}catch(e){}}
+  function beepError(){try{var ctx=new(window.AudioContext||window.webkitAudioContext)(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.connect(gain);gain.connect(ctx.destination);osc.type='sawtooth';osc.frequency.value=220;gain.gain.setValueAtTime(0.2,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+0.35);osc.start(ctx.currentTime);osc.stop(ctx.currentTime+0.35);}catch(e){}}
   function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 </script>
 </body>
